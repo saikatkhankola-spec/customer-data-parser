@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer Data Parser</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>Customer Data Parser</h1>
+    <p class="lede">Drop in a messy customer file. Get back a clean one, with every change marked.</p>
+    <p class="example" aria-label="Example of a correction">
+      <s>rahul sharma , RAHUL@GMAIL.COM</s>
+      <mark>Rahul Sharma, rahul@gmail.com</mark>
+    </p>
+  </header>
+
+  <main>
+    <section class="tray" id="tray">
+      <input type="file" id="file" accept=".csv,.xlsx,.xls" hidden>
+      <p class="tray-title" id="tray-title">Drop a CSV or Excel file here</p>
+      <div class="tray-actions">
+        <button type="button" id="pick">Choose a file</button>
+        <button type="button" id="sample" class="ghost">Try sample data</button>
+      </div>
+    </section>
+
+    <p class="notice" id="notice" role="alert" hidden></p>
+
+    <section id="proof" hidden>
+      <p id="summary"></p>
+      <div id="report"></div>
+      <div class="bar">
+        <div class="filters" role="group" aria-label="Show rows">
+          <button type="button" data-f="all" aria-pressed="true">All rows</button>
+          <button type="button" data-f="attention" aria-pressed="false">Needs attention</button>
+          <button type="button" data-f="fixed" aria-pressed="false">Fixed</button>
+        </div>
+        <label><input type="checkbox" id="skipdupes" checked> Leave out duplicates</label>
+        <button type="button" id="download">Download clean CSV</button>
+      </div>
+      <div class="scroll"><table id="table"></table></div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
